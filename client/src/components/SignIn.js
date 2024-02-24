@@ -1,16 +1,22 @@
 import PropTypes from 'prop-types'
-import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { firebase, auth } from "../firebase";
 import Google from '../svg/Google.js'
+import axios from 'axios'
 
 
 export default function SignIn(props) {
   const handleGoogleSignIn = async () => {
     try {
-      const provider = new GoogleAuthProvider();
-      const auth = getAuth();
-      const response = await signInWithPopup(auth, provider);
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+      const name= user.displayName;
+      const email = user.email;
+      console.log(email);
+      const response = await axios.post("http://localhost:3001/api/add/user", {email, name});
+      localStorage.setItem('user', JSON.stringify(user));
     } catch (error) {
-      console.log("Some error occurred", error);
+      console.error('Google Sign-In Error:', error.message);
     }
   };
 
