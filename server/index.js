@@ -145,6 +145,46 @@ app.post('/api/user/seeds', async (req, res) => {
     }
 });
 
+app.post('/api/add/tool', async (req, res) => {
+    try {
+        const { name, quantity, price, user_email } = req.body;
+
+        const { rows } = await dbPool.query(
+            'INSERT INTO tools (name, quantity, price, user_email) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, quantity, price, user_email]
+        );
+
+        res.json(rows[0]);
+    }
+    catch (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/api/tools', async (req, res) => {
+    try {
+        const { rows } = await dbPool.query('SELECT * FROM tools');
+        res.json(rows);
+    }
+    catch (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/api/tool/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rows } = await dbPool.query('SELECT * FROM tools WHERE id = $1', [id]);
+        res.json(rows[0]);
+    }
+    catch (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
 });
