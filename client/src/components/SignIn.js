@@ -2,17 +2,17 @@ import PropTypes from 'prop-types'
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import Google from '../svg/Google.js'
 
-const auth = firebase.auth()
 
 export default function SignIn(props) {
   const handleGoogleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      auth.signInWithPopup(provider);
+      const auth = getAuth();
+      const response = await signInWithPopup(auth, provider);
     } catch (error) {
       console.log("Some error occurred", error);
     }
-  }
+  };
 
   return (
     <div className="flex relative items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

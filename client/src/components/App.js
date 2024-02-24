@@ -7,10 +7,10 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import Home from './components/Home'
-import Dashboard from './components/Dashboard'
-import Inventory from './components/Inventory'
-import './App.css';
+import Home from './Home'
+import Dashboard from './Dashboard'
+import Inventory from './Inventory'
+import '../styles/App.css';
 
 function App() {
   const handleGoogleSignIn = async () => {
