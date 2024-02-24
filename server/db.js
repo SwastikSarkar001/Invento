@@ -1,12 +1,21 @@
-// In db.js
-const { Pool } = require("pg");
+const { Pool } = require('pg');
+require('dotenv').config();
 
 // The secret connection string you copied earlier
-const connectionString =
-  "postgresql://postgres:5bG5ee26D-bC61A436D216GDfcda5611@viaduct.proxy.rlwy.net:47239/railway";
+const connectionString = process.env.DATABASE_URL;
 
 const pool = new Pool({
   connectionString,
+});
+
+// Check if the database is connected
+pool.on('connect', () => {
+  console.log('Connected to the database');
+});
+
+// Handle errors
+pool.on('error', (err) => {
+  console.error('Error connecting to the database:', err.message);
 });
 
 module.exports = pool;
