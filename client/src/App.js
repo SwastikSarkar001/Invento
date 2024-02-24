@@ -2,18 +2,20 @@ import React from 'react'
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
 import Home from './components/Home'
-import About from './components/About'
+import Dashboard from './components/Dashboard'
+import Inventory from './components/Inventory'
 import './App.css';
 
 function App() {
-  return (
+  let isSignedIn = true // Checks whether the user is signed in or not
 
-    <div className="App">
+  return (
+    <div className="App dark:bg-teal-950">
       <Router>
         <Navbar />
         <Routes>
-          <Route exact path='/' element=<Home /> />
-          <Route exact path='/about' element=<About /> />
+          <Route exact path='/' element={isSignedIn ? <Dashboard /> : <Home />} />
+          <Route exact path='/inventory' element=<Inventory /> />
           <Route path='*' element=<Navigate to='/' /> />
         </Routes>
       </Router>
