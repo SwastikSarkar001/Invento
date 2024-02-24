@@ -1,8 +1,7 @@
-import React from 'react'
-
 export default function Inventory() {
+  
   return (
-    <div className="w-svw py-6">
+    <div className="inventory w-svw py-6">
       <div className="p-0.5 w-1/3 ml-auto mr-5 relative bg-gradient-to-br from-green-400 to-blue-600 rounded-3xl">
         <div class="absolute inset-y-0 left-2.5 start-0 flex items-center ps-3 pointer-events-none">
           <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

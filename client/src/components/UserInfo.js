@@ -1,4 +1,3 @@
-import React from 'react'
 import dummy from '../svg/dummy-person.svg'
 import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
