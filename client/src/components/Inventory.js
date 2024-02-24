@@ -1,7 +1,7 @@
-import React from 'react'
-
 export default function Inventory() {
+  
   return (
+  
     <div className="w-svw py-6">
       <h1 className="md:text-5xl p-8 font-semibold text-left whitespace-nowrap dark:text-white">Inventory Items</h1>
       <div className="p-0.5 w-1/3 ml-auto mr-5 relative bg-gradient-to-br from-green-400 to-blue-600 rounded-3xl">
