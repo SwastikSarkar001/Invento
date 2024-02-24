@@ -1,12 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import Google from '../svg/Google.js'
+
+const auth = firebase.auth()
 
 export default function SignIn(props) {
+  const handleGoogleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      auth.signInWithPopup(provider);
+    } catch (error) {
+      console.log("Some error occurred", error);
+    }
+  }
+
   return (
     <div className="flex relative items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-          Green to blue
+      <button onClick={handleGoogleSignIn} className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+        <span className="flex items-center relative px-3.5 align-middle py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          <Google />Sign In
         </span>
       </button>
 

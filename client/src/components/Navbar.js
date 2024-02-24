@@ -18,7 +18,7 @@ export default function Navbar() {
     else setNavHidden('')
   }
 
-  let isSignedIn = true // Checks whether the user is signed in or not
+  let isSignedIn = false // Checks whether the user is signed in or not
   
   const activeLink = "block py-2 px-3 text-white bg-teal-700 rounded md:bg-transparent md:text-tea-700 md:p-0 md:dark:text-teal-300"
   const passiveLink = "block py-2 px-3 text-teal-950 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-tea-700 md:p-0 dark:text-white md:dark:hover:text-teal-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
