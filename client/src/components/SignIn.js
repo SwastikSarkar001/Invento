@@ -1,30 +1,20 @@
 import PropTypes from 'prop-types'
-import { provider, auth } from "../firebaseConfig";
 import Google from '../svg/Google.js'
 import axios from 'axios'
-import { signInWithPopup } from 'firebase/auth';
+import { useEffect } from 'react';
 
 
 export default function SignIn(props) {
-  const handleGoogleSignIn = async () => {
-    try {
-      const [result] = await signInWithPopup(auth, provider);
-      console.log(result)
-      const user = result.user;
-      const name = user.displayName;
-      const email = user.email;
-      console.log(email);
-      const response = await axios.post("http://localhost:3001/api/add/user", {email, name});
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('email', email);
-    } catch (error) {
-      console.error('Google Sign-In Error:', error.message);
-    }
-  };
+  
+
+  useEffect(() => {
+    // const [result] = signInWithPopup(auth, provider)
+    // console.log(result)
+  })
 
   return (
     <div className="flex relative items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button onClick={handleGoogleSignIn} className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+      <button onClick={props.handleGoogleSignIn} className="relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
         <span className="flex items-center relative px-3.5 align-middle py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
           <Google />Sign In
         </span>

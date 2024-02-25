@@ -1,8 +1,10 @@
+import { useEffect } from 'react'
 import dummy from '../svg/dummy-person.svg'
 import PropTypes from 'prop-types'
 // import { Link } from 'react-router-dom'
 
 export default function UserInfo(props) {
+  useEffect(() => console.log(props.userData))
   return (
     <div className="flex relative items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button type="button" id="user-menu-button"
@@ -12,7 +14,7 @@ export default function UserInfo(props) {
       >
         <span className="sr-only">Open user menu</span>
         {/* eslint-disable-next-line */}
-        <img className="w-8 h-8 rounded-full bg-white" src={dummy} alt="User Photo" />
+        <img className="w-8 h-8 rounded-full bg-white" src={props.userData.photoURL} alt="User Photo" />
       </button>
 
       {/* Dropdown menu */}
@@ -23,10 +25,10 @@ export default function UserInfo(props) {
       >
         <div className="px-4 py-3">
           <span className="block text-sm text-gray-900 dark:text-white">
-            Your Name
+            {props.userData.displayName}
           </span>
           <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-            yourname@example.com
+            {props.userData.email}
           </span>
         </div>
         <ul className="py-2" aria-labelledby="user-menu-button">
@@ -52,7 +54,7 @@ export default function UserInfo(props) {
             </a>
           </li>
           <li>
-            <a href="/"
+            <a href="/" onClick={props.signOut}
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >
               Sign out

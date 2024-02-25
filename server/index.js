@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 app.get('/api', async (req, res) => {
     try {
-        const { rows } = await dbPool.query('SELECT $1::text as message', ['Hello, world!']);
+        const { rows } = await dbPool.query ('SELECT $1::text as message', ['Hello, world!']);
         res.json(rows[0]);
     } catch (err) {
         console.error('Error executing query', err);
@@ -30,7 +30,7 @@ app.post('/api/addProduct', async (req, res) => {
         const { product_name, category_id, supplier_id, price, stock_quantity } = req.body;
         console.log(req.body);
 
-        const { rows } = await dbPool.query(
+        const { rows } = await dbPool.query (
             'INSERT INTO inventory (product_name, category_id, supplier_id, price, stock_quantity) VALUES ($1, $2, $3, $4, $5) RETURNING *',
             [product_name, category_id, supplier_id, price, stock_quantity]
         );

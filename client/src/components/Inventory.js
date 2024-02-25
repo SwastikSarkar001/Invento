@@ -39,7 +39,7 @@ export default function Inventory() {
   
   return (
     <div className="w-svw py-6">
-      <h1 className="md:text-5xl p-8 font-semibold text-left whitespace-nowrap dark:text-white">Inventory Items</h1>
+      <h1 className="md:text-5xl mt-8 p-8 font-semibold text-left whitespace-nowrap dark:text-white">Inventory Items</h1>
 
       <div className="p-0.5 w-1/3 mr-auto ml-8 mb-8 relative bg-gradient-to-br from-green-400 to-blue-600 rounded-3xl">
         <div className="absolute inset-y-0 left-2.5 flex items-center ps-3 pointer-events-none">
@@ -50,7 +50,7 @@ export default function Inventory() {
         </div>
         <input
           type="text" id="search-navbar"
-          className="block w-full p-2 ps-12 text-m outline-none text-gray-900 group-hover:bg-opacity-0 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+          className="block w-full p-2 ps-12 text-base outline-none text-gray-900 group-hover:bg-opacity-0 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
           placeholder="Search anything... (Enter to search)"
         />
       </div>
