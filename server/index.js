@@ -202,6 +202,20 @@ app.get('/api/tool/:id', async (req, res) => {
     }
 });
 
+// get all tools for a user
+
+app.post('/api/user/tools', async (req, res) => {
+    try {
+        const { email } = req.body;
+        const { rows } = await dbPool.query('SELECT * FROM tools WHERE user_email = $1', [email]);
+        res.json(rows);
+    }
+    catch (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`);
 });
