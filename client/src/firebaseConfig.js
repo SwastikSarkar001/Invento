@@ -1,10 +1,12 @@
+// import { initializeApp } from "firebase/app";
+// import { getFirestore, collection } from "firebase/firestore";
+// import { getAuth, GoogleAuthProvider } from "firebase/auth";
 // import firebase from 'firebase/compat/app';
 // import 'firebase/compat/auth';
 // import 'firebase/compat/firestore';
 // import 'firebase/compat/storage';
 
-
-// firebase.initializeApp({
+// const app = firebase.initializeApp ({
 //   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 //   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 //   projectId: process.env.REACT_APP_FIREBASE_PEOJECT_ID,
@@ -14,8 +16,13 @@
 //   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 // });
 
-// const firestore = firebase.firestore();
-// const storage = firebase.storage();
-// const auth = firebase.auth();
+// // const db = getFirestore(app);
+// // const firestore = firebase.firestore();
+// // const storage = firebase.storage();
+// // const auth = firebase.auth();
 
-// export { auth, firestore, storage, firebase };
+// const auth = getAuth(app);
+// const provider = new GoogleAuthProvider()
+
+// // export { auth, firestore, storage, firebase };
+// export { auth, provider };

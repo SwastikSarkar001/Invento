@@ -23,7 +23,7 @@ function App() {
       console.log("Some error occurred", error);
     }
   }
-  let isSignedIn = true // Checks whether the user is signed in or not
+  let isSignedIn = false // Checks whether the user is signed in or not
 
   return (
     <div className="App dark:bg-teal-950">

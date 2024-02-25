@@ -4,14 +4,14 @@ import axios from 'axios';
 
 export default function Inventory() {
   const [dataset, setDataset] = useState([]);
+
   const seeds = async () => {
     try {
       const response = await axios.post('http://localhost:3001/api/user/seeds', {
-        email: 'niladri@gmail.com'
+        email: localStorage.getItem('email')
       })
       const data = response.data
       setDataset(data)
-      console.log(data)
     }
     catch (err) {
       console.error('Error fetching seeds:', err.message);
@@ -56,7 +56,7 @@ export default function Inventory() {
             <th className="px-5 py-3">Available</th>
             <th className="px-5 py-3">Max. Capacity</th>
             <th className="px-5 py-3">Price</th> */}
-            
+
           </tr>
         </thead>
         <tbody>
