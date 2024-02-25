@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DataWrapper from './DataWrapper'
 
 export default function Inventory() {
+  const seeds = async () => {
+    const response = await fetch('http://localhost:3001/api/seeds', {
+      method: 'GET',
+      headers: {'Content-type': 'application/json'},
+
+    })
+    console.log(JSON.stringify(response))
+  }
+
+  useEffect(() => {
+    seeds()
+  }, [])
   
   return (
   
@@ -9,11 +21,11 @@ export default function Inventory() {
       <h1 className="md:text-5xl p-8 font-semibold text-left whitespace-nowrap dark:text-white">Inventory Items</h1>
 
       <div className="p-0.5 w-1/3 mr-auto ml-8 mb-8 relative bg-gradient-to-br from-green-400 to-blue-600 rounded-3xl">
-        <div class="absolute inset-y-0 left-2.5 flex items-center ps-3 pointer-events-none">
-          <svg class="size-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+        <div className="absolute inset-y-0 left-2.5 flex items-center ps-3 pointer-events-none">
+          <svg className="size-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
           </svg>
-          <span class="sr-only">Search icon</span>
+          <span className="sr-only">Search icon</span>
         </div>
         <input
           type="text" id="search-navbar"

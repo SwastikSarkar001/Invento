@@ -40,7 +40,8 @@ export default function Navbar() {
           </span>
         </Link>
         
-        { isSignedIn ? <UserInfo infoToggler={infoToggler} infoHidden={infoHidden} navToggler={navToggler} /> : <SignIn toggler={navToggler} /> }
+        {/* { isSignedIn ? <UserInfo infoToggler={infoToggler} infoHidden={infoHidden} navToggler={navToggler} /> : <SignIn toggler={navToggler} /> } */}
+        { isSignedIn && <UserInfo infoToggler={infoToggler} infoHidden={infoHidden} navToggler={navToggler} />}
 
         <div
           className={`items-center ${navHidden} justify-between w-full md:flex md:w-auto md:order-1`}
