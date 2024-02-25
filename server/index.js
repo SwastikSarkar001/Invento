@@ -213,7 +213,7 @@ app.get('/api/tool/:id', async (req, res) => {
 app.post('/api/user/tools', async (req, res) => {
     try {
         const { email } = req.body;
-        const { rows } = await dbPool.query('SELECT * FROM tools WHERE user_email = $1', [email]);
+        const { rows } = await dbPool.query('SELECT tool_id, name, quantity, price FROM tools WHERE user_email = $1', [email]);
         res.json(rows);
     }
     catch (err) {
