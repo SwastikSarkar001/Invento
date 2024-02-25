@@ -1,6 +1,7 @@
 const express = require('express');
 const dbPool = require('./db');
 const cors = require('cors');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
 
 const app = express();
@@ -166,6 +167,22 @@ app.get('/api/tools', async (req, res) => {
     try {
         const { rows } = await dbPool.query('SELECT * FROM tools');
         res.json(rows);
+    }
+    catch (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+app.get('/api/gen-ai', async (req, res) => {
+    try {
+        const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+        const { prompt } = req.body;
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        res.send(text);
     }
     catch (err) {
         console.error('Error executing query', err);
