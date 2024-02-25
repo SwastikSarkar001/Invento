@@ -177,12 +177,18 @@ app.get('/api/tools', async (req, res) => {
 app.get('/api/gen-ai', async (req, res) => {
     try {
         const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-        const { prompt } = req.body;
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const { msg } = req.body;
+        const { email } = req.body;
+        const seeds = await dbPool.query('SELECT * FROM seeds WHERE user_email = $1', [email]);
+        const tools = await dbPool.query('SELECT * FROM tools');
+        const seedData = JSON.stringify(seeds);
+        const toolData = JSON.stringify(tools);
+        const prompt = "My email is: " + email + ". I am a farmer. You act like my assistant. These are the crops in the inventory" + seedData + ". These are the tools in the inventory " + toolData + ". The tools and crops are mapped with email. Answer only with the info I have already provided."
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        res.send(text);
+        res.json({ answer: text });
     }
     catch (err) {
         console.error('Error executing query', err);
