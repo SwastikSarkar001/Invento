@@ -18,12 +18,26 @@ export default function Inventory() {
     }
   }
 
+  const tools = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/user/tools', {
+        email: 'niladri@gmail.com'
+      })
+      const data = response.data
+      // setDataset(data)
+      console.log(data)
+    }
+    catch (err) {
+      console.error('Error fetching seeds:', err.message);
+    }
+  }
+
   useEffect(() => {
-    seeds()
+    seeds();
+    tools();
   }, [])
   
   return (
-  
     <div className="w-svw py-6">
       <h1 className="md:text-5xl p-8 font-semibold text-left whitespace-nowrap dark:text-white">Inventory Items</h1>
 
