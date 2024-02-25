@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import DataWrapper from './DataWrapper'
+import axios from 'axios';
 
 export default function Inventory() {
+  const [dataset, setDataset] = useState([]);
   const seeds = async () => {
-    const response = await fetch('http://localhost:3001/api/seeds', {
-      method: 'GET',
-      headers: {'Content-type': 'application/json'},
-
-    })
-    console.log(JSON.stringify(response))
+    try {
+      const response = await axios.post('http://localhost:3001/api/user/seeds', {
+        email: 'niladri@gmail.com'
+      })
+      const data = response.data
+      setDataset(data)
+      console.log(data)
+    }
+    catch (err) {
+      console.error('Error fetching seeds:', err.message);
+    }
   }
 
   useEffect(() => {
@@ -37,18 +44,25 @@ export default function Inventory() {
       <table cellSpacing={3} className='w-full border-collapse text-center dark:text-white'>
         <thead>
           <tr className="mb-5 text-lg font-bold">
-            <th className="px-5 py-3">S. No.</th>
+            <th className="px-5 py-3">Seed No.</th>
+            <th className="px-5 py-3">Name</th>
+            <th className="px-5 py-3">Quantity</th>
+            <th className="px-5 py-3">Price</th>
+
+            {/* <th className="px-5 py-3">S. No.</th>
             <th className="px-5 py-3">Image</th>
             <th className="px-5 py-3">Name</th>
             <th className="px-5 py-3">Category</th>
             <th className="px-5 py-3">Available</th>
             <th className="px-5 py-3">Max. Capacity</th>
-            <th className="px-5 py-3">Price</th>
+            <th className="px-5 py-3">Price</th> */}
+            
           </tr>
         </thead>
         <tbody>
-          <DataWrapper record={['1', 'Pic', 'Wheat Seeds', 'Seed', '45', '300', '40']} />
-          <DataWrapper record={['1', 'Pic', 'Wheat Seeds', 'Seed', '45', '300', '40']} />
+          {dataset.map(value => {
+            return <DataWrapper record={value} />
+          })}
         </tbody>
       </table>
 

@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -137,7 +137,7 @@ app.get('/api/user/:id', async (req, res) => {
 app.post('/api/user/seeds', async (req, res) => {
     try {
         const { email } = req.body;
-        const { rows } = await dbPool.query('SELECT * FROM seeds WHERE user_email = $1', [email]);
+        const { rows } = await dbPool.query('SELECT seed_id, name, quantity, price FROM seeds WHERE user_email = $1', [email]);
         res.json(rows);
     }
     catch (err) {
