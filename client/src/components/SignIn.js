@@ -10,7 +10,7 @@ export default function SignIn(props) {
       const provider = new firebase.auth.GoogleAuthProvider();
       const result = await auth.signInWithPopup(provider);
       const user = result.user;
-      const name= user.displayName;
+      const name = user.displayName;
       const email = user.email;
       console.log(email);
       const response = await axios.post("http://localhost:3001/api/add/user", {email, name});

@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -137,7 +137,7 @@ app.get('/api/user/:id', async (req, res) => {
 app.post('/api/user/seeds', async (req, res) => {
     try {
         const { email } = req.body;
-        const { rows } = await dbPool.query('SELECT * FROM seeds WHERE user_email = $1', [email]);
+        const { rows } = await dbPool.query('SELECT seed_id, name, quantity, price FROM seeds WHERE user_email = $1', [email]);
         res.json(rows);
     }
     catch (err) {
@@ -177,12 +177,18 @@ app.get('/api/tools', async (req, res) => {
 app.get('/api/gen-ai', async (req, res) => {
     try {
         const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-        const prompt = "Write a story about a magic backpack."
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const { msg } = req.body;
+        const { email } = req.body;
+        const seeds = await dbPool.query('SELECT * FROM seeds WHERE user_email = $1', [email]);
+        const tools = await dbPool.query('SELECT * FROM tools');
+        const seedData = JSON.stringify(seeds);
+        const toolData = JSON.stringify(tools);
+        const prompt = "My email is: " + email + ". I am a farmer. You act like my assistant. These are the crops in the inventory" + seedData + ". These are the tools in the inventory " + toolData + ". The tools and crops are mapped with email. Answer only with the info I have already provided."
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
-        res.send(text);
+        res.json({ answer: text });
     }
     catch (err) {
         console.error('Error executing query', err);
@@ -207,7 +213,7 @@ app.get('/api/tool/:id', async (req, res) => {
 app.post('/api/user/tools', async (req, res) => {
     try {
         const { email } = req.body;
-        const { rows } = await dbPool.query('SELECT * FROM tools WHERE user_email = $1', [email]);
+        const { rows } = await dbPool.query('SELECT tool_id, name, quantity, price FROM tools WHERE user_email = $1', [email]);
         res.json(rows);
     }
     catch (err) {
